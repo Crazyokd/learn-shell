@@ -5,8 +5,10 @@ push(){
     git push -f origin main
 }
 
-push
-while [[ $? -gt 0 ]]; do
-  echo "push failed, try again..."
-  push
+while [[ 1 -gt 0 ]]; do
+  if [[ $? -gt 0 ]]; then 
+    push
+  else 
+    echo "push failed, try again..."
+  fi
 done
