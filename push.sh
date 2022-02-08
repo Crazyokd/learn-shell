@@ -6,9 +6,11 @@ push(){
 }
 
 while [[ 1 -gt 0 ]]; do
-  if [[ $? -gt 0 ]]; then 
-    push
-  else 
+  push
+  if [[ $? -gt 0 ]]; then
     echo "push failed, try again..."
+  else 
+    echo "push success"
+    break
   fi
 done
