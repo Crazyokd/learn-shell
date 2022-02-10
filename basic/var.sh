@@ -38,6 +38,7 @@ Common environment variables:
 variable 	 describe
 $HOME 	 User directory of the current user
 $PATH 	 A semicolon delimited list of directories where the shell looks for commands
+$SHELL   The name of current shell
 $PWD 	 Current working directory
 $RANDOM 	 Integer between 0 and 32767
 $UID 	 Value type, user ID of current user
@@ -72,3 +73,12 @@ for color in $colors
 do
 	echo "$color"
 done
+
+
+
+
+:<<EOF
+exit | ctrl + D  	:exit shell
+bash --version
+echo $BASH_VERSION
+EOF
