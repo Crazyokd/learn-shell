@@ -31,26 +31,45 @@ echo ${str3}_${str4}
 text="12345"
 echo ${#text}
 
-# intercept string
+# ${varname:offset:length}
 echo ${text:1:2}
+echo ${text:1}
+echo ${text: -3}
+echo ${text: -3:2}
 
+# pattern matching
+# delete the part of matched string, and return the rest string,begin from head
+# ${varname#pattern} # 非贪婪匹配
+# ${varname##pattern} # 贪婪匹配
 full_branch="feature/1.0.0"
 branch=`echo ${full_branch#feature/}`
 echo "branch is ${branch}"
-
+# begin from tail
+# ${variable%pattern} # 非贪婪匹配
+# ${variable%%pattern} # 贪婪匹配
 full_version="0.0.1-SNAPSHOT"
 version=`echo ${full_version%-SNAPSHOT}`
 echo "version is ${version}"
+# begin from head or tail
+# ${variable/pattern/string} # 非贪婪匹配
+# ${variable//pattern/string} # 贪婪匹配
+
+# replace string
+# replace the part of matched string,and return the final string
+# ${variable/#pattern/string}
+# ${variable/%pattern/string}
+foo=JPG.JPG
+echo ${foo/#JPG/jpg}
 
 # find sub string
 text="hello"
 echo `expr index "${text}" ll`
 
 # whether string contains
-str=feature/test
-result=$(echo "${str}" | grep "feature/")
-echo ${result}
-if [[ "$result" != "" ]]; then
+str="feature/test"
+resultt=$(echo "${str}" | grep "feature/")
+echo ${resultt}
+if [[ "$resultt" != "" ]]; then
 	echo "feature/ 是 ${str} 的子字符串"
 else
 	echo "feature/ 不是 ${str} 的子字符串"
@@ -106,3 +125,9 @@ if [[ $str2 = "hello" ]]; then
 else
 	echo "str2 not equals hello"
 fi
+
+
+# change case
+foo=HelLo
+echo ${foo^^}
+echo ${foo,,}
