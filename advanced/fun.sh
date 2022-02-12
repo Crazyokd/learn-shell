@@ -36,7 +36,7 @@ calc(){
   break
   done
 }
-calc
+# calc
 echo "the result is: $?" # $? get the return value of the calc function
 
 
@@ -110,3 +110,58 @@ paramsFunction(){
   echo "runner 函数的返回值：$?"
 }
 paramsFunction 1 "abc" "hello, \"Rekord\""
+
+
+:<<EOF
+shift命令可以改变脚本参数，每次执行都会移除脚本当前的第一个参数（$1），使得后面的参数向前一位，即$2变成$1、$3变成$2、$4变成$3，以此类推。
+EOF
+
+while getopts 'lha:' OPTION; do
+  case "$OPTION" in
+    l)
+      echo "linuxconfig"
+      ;;
+
+    h)
+      echo "h stands for h"
+      ;;
+
+    a)
+      avalue="$OPTARG"
+      echo "The value provided is $OPTARG"
+      ;;
+    ?)
+      echo "script usage: $(basename $0) [-l] [-h] [-a somevalue]" >&2
+      exit 1
+      ;;
+  esac
+done
+shift "$(($OPTIND - 1))"
+
+:<<EOF
+上面例子中，while循环不断执行getopts 'lha:' OPTION命令，每次执行就会读取一个连词线参数（以及对应的参数值），然后进入循环体。变量OPTION保存的是，当前处理的那一个连词线参数（即l、h或a）。如果用户输入了没有指定的参数（比如-x），那么OPTION等于?。循环体内使用case判断，处理这四种不同的情况。
+
+如果某个连词线参数带有参数值，比如-a foo，那么处理a参数的时候，环境变量$OPTARG保存的就是参数值。
+
+注意，只要遇到不带连词线的参数，getopts就会执行失败，从而退出while循环。比如，getopts可以解析command -l foo，但不可以解析command foo -l。另外，多个连词线参数写在一起的形式，比如command -lh，getopts也可以正确处理。
+
+变量$OPTIND在getopts开始执行前是1，然后每次执行就会加1。等到退出while循环，就意味着连词线参数全部处理完毕。这时，$OPTIND - 1就是已经处理的连词线参数个数，使用shift命令将这些参数移除，保证后面的代码可以用$1、$2等处理命令的主参数。
+EOF
+
+
+# 配置项参数终止符 -- 
+
+
+:<<EOF
+source命令用于执行一个脚本，通常用于重新加载一个配置文件。
+source命令最大的特点是在当前 Shell 执行脚本，不像直接执行脚本时，会新建一个子 Shell。
+所以，source命令执行脚本时，不需要export变量。
+source有一个简写形式，可以使用一个点（.）来表示。
+EOF
+
+
+:<<EOF
+alias # 显示所有别名
+alias name=definition
+unalias name  # 删除别名
+EOF
