@@ -1,0 +1,28 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# redirecting output to different locations 
+exec 2>error.log 
+echo "This is the start of the script" 
+echo "now redirecting all output to another location" 
+exec 1>out.log
+echo "This output should go to the testout file" 
+echo "but this should go to the testerror file" >&2
+
+# redirecting all output to a file 
+# exec 1>out.log 
+echo "This is a test of redirecting all output" 
+echo "from a script to another file." 
+echo "without having to redirect every individual line"
+
+exec 0< test
+count=1 
+while read line 
+do 
+    echo "Line #$count: $line" 
+    count=$[ $count + 1 ] 
+done
+
+# using an alternative file descriptor 
+exec 3>output3.log
+echo "This should display on the monitor" 
+echo "and this should be stored in the file" >&3 
+echo "Then this should be back on the monitor"

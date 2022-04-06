@@ -1,0 +1,19 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#
+# changing the IFS value 
+IFS.OLD=$IFS 
+IFS=$'\n'
+echo "the first IFS is: $IFS"
+for entry in $(cat ./passwd) 
+do 
+    echo "Values in $entry –" 
+    IFS=: 
+    echo "the second IFS is: $IFS"
+    for value in $entry 
+    do 
+        echo " $value" 
+    done 
+done
+
+IFS=${IFS.OLD}
+echo "the last IFS is: $IFS"

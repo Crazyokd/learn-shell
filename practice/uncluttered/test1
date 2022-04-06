@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#
+
+ps -f --forest
+
+echo $BASH_SUBSHELL
+
+echo "the path is : $PATH"

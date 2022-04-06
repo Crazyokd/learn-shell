@@ -1,0 +1,14 @@
+This output should go to the testout file
+This is a test of redirecting all output
+from a script to another file.
+without having to redirect every individual line
+Line #1: #!/data/data/com.termux/files/usr/bin/bash
+Line #2: #
+Line #3: 
+Line #4: ps -f --forest
+Line #5: 
+Line #6: echo $BASH_SUBSHELL
+Line #7: 
+Line #8: echo "the path is $PATH"
+This should display on the monitor
+Then this should be back on the monitor

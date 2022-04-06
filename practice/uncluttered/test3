@@ -1,0 +1,20 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#
+
+subshell="the command replace is `echo $BASH_SUBSHELL`"
+echo $subshell
+
+process_output="`ps -f --forest`"
+echo $process_output
+
+ps -f --forest
+
+echo the script shell is $BASH_SUBSHELL
+
+echo "the path is : $PATH"
+
+echo my_var : $my_var
+
+script_var=2
+command_replace_output=`echo $script_var`
+echo $command_replace_output
